@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import logoSpark from "@/assets/logo-spark.svg";
+import logoSpark from "@/assets/logo-on-dark.svg";
 import { Button } from "@/components/ui/button";
 
 export function Header() {
