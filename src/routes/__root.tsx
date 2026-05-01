@@ -29,14 +29,18 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Aicorn" },
+      { name: "description", content: "Aicorn Website is a landing page showcasing the Aicorn project's branding and description." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Aicorn" },
+      { property: "og:description", content: "Aicorn Website is a landing page showcasing the Aicorn project's branding and description." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Aicorn" },
+      { name: "twitter:description", content: "Aicorn Website is a landing page showcasing the Aicorn project's branding and description." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/7OJ1qjTNZ1MBX6OytCrC9EWnGDk2/social-images/social-1777641723444-aicorn-mascot2.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/7OJ1qjTNZ1MBX6OytCrC9EWnGDk2/social-images/social-1777641723444-aicorn-mascot2.webp" },
     ],
     links: [
       {
