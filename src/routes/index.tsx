@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import heroImg from "@/assets/hero-network.jpg";
-import acorn from "@/assets/acorn.png";
+import mascot from "@/assets/aicorn-mascot.png";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -64,6 +64,13 @@ function Hero() {
         className="pointer-events-none absolute inset-0 -z-10"
         style={{ background: "var(--gradient-hero)" }}
       />
+      {/* Mascot peeking from the right edge — decorative, subtle */}
+      <img
+        src={mascot}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute right-2 top-20 hidden w-32 rotate-6 opacity-90 drop-shadow-[0_20px_40px_rgba(255,170,80,0.35)] animate-float lg:block lg:w-40 xl:w-48"
+      />
       <div className="container mx-auto max-w-6xl px-6 pt-24 pb-32 md:pt-32 md:pb-40">
         <div className="mx-auto max-w-3xl text-center animate-fade-up">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-medium text-primary">
@@ -88,13 +95,12 @@ function Hero() {
           </div>
         </div>
 
-        <div className="relative mx-auto mt-20 hidden max-w-md md:block">
+        {/* Mascot for small screens, centered below copy */}
+        <div className="mt-16 flex justify-center lg:hidden">
           <img
-            src={acorn}
-            alt=""
-            width={320}
-            height={320}
-            className="mx-auto h-48 w-48 animate-float drop-shadow-[0_30px_60px_rgba(255,170,80,0.35)]"
+            src={mascot}
+            alt="Aicorn mascot"
+            className="h-40 w-auto animate-float drop-shadow-[0_30px_60px_rgba(255,170,80,0.35)]"
           />
         </div>
       </div>
