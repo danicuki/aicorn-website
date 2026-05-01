@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "A shared, credit-metered cache for agent-friendly web content. One agent extracts, the rest of the forest harvests. Built on Cloudflare.",
+          "A shared, credit-metered cache for agent-friendly web content. One agent extracts, the rest of the forest harvests.",
       },
       { property: "og:title", content: "Aicorn — Shared cache for AI agents" },
       {
@@ -39,6 +39,7 @@ function Index() {
         <Economics />
         <Demo />
         <Architecture />
+        <TryNow />
         <CTA />
       </main>
       <Footer />
@@ -67,7 +68,7 @@ function Hero() {
         <div className="mx-auto max-w-3xl text-center animate-fade-up">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-medium text-primary">
             <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse-glow" />
-            Cloudflare Hackathon · Workers + KV + Workers AI
+            Live · Shared cache for AI agents
           </div>
           <h1 className="text-balance text-5xl font-bold tracking-tight md:text-7xl">
             Crack the page once.{" "}
@@ -78,11 +79,11 @@ function Hero() {
             One agent extracts. The rest of the forest harvests. Contributors earn credits when others read what they cracked.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a href="#demo">
-              <Button variant="hero" size="xl">See the 20× demo</Button>
+            <a href="#try">
+              <Button variant="hero" size="xl">Try Aicorn free</Button>
             </a>
-            <a href="https://github.com/danicuki/aicorn" target="_blank" rel="noreferrer">
-              <Button variant="kernel" size="xl">Read the docs</Button>
+            <a href="#demo">
+              <Button variant="kernel" size="xl">See the 20× demo</Button>
             </a>
           </div>
         </div>
@@ -106,7 +107,7 @@ function Stats() {
     { value: "20×", label: "Cheaper per cached read" },
     { value: "400", label: "Tokens on a cache HIT" },
     { value: "8,000", label: "Tokens on a cold MISS" },
-    { value: "9", label: "Credits earned per re-read" },
+    { value: "5,000", label: "Free credits at signup" },
   ];
   return (
     <section className="border-y border-border/40 bg-card/40">
@@ -367,16 +368,72 @@ function CTA() {
           Stop paying to clean the same page <span className="text-kernel-gradient">twice.</span>
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
-          Aicorn is open source and built for the Cloudflare hackathon. Read the spec, run the Worker, plug it into your agent.
+          Create a free account, drop SKILL.md into your agent, and start saving tokens on your very next request.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href="https://github.com/danicuki/aicorn" target="_blank" rel="noreferrer">
-            <Button variant="hero" size="xl">Star on GitHub</Button>
+          <a href="#try">
+            <Button variant="hero" size="xl">Get 5,000 free credits</Button>
           </a>
-          <a href="https://github.com/danicuki/aicorn/blob/main/PROJECT.md" target="_blank" rel="noreferrer">
-            <Button variant="kernel" size="xl">Read the project spec</Button>
+          <a href="https://github.com/danicuki/aicorn" target="_blank" rel="noreferrer">
+            <Button variant="kernel" size="xl">View on GitHub</Button>
           </a>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function TryNow() {
+  const steps = [
+    {
+      n: "01",
+      title: "Create your account",
+      body: "Sign up in under a minute and instantly receive 5,000 free credits — enough to harvest thousands of cached pages.",
+      cta: { label: "Create free account", href: "https://github.com/danicuki/aicorn" },
+    },
+    {
+      n: "02",
+      title: "Install SKILL.md on your agent",
+      body: "Drop our SKILL.md into Claude, Cursor, your custom agent, or any tool-using LLM. It teaches your agent to read the web through Aicorn.",
+      cta: { label: "Get SKILL.md", href: "https://github.com/danicuki/aicorn/blob/main/SKILL.md" },
+    },
+    {
+      n: "03",
+      title: "Start using and saving tokens",
+      body: "Every cached page costs a fraction of a fresh extraction. Watch your token bill drop from the first request — and earn credits when others read what you cracked.",
+      cta: { label: "See the economics", href: "#economics" },
+    },
+  ];
+  return (
+    <section id="try" className="container mx-auto max-w-6xl px-6 py-24 md:py-32">
+      <div className="mx-auto max-w-2xl text-center">
+        <div className="font-mono text-xs uppercase tracking-widest text-primary">Try it now</div>
+        <h2 className="mt-3 text-4xl font-bold tracking-tight md:text-5xl">
+          Three steps to a cheaper agent.
+        </h2>
+        <p className="mt-4 text-lg text-muted-foreground">
+          No infrastructure to set up. No model to host. Just sign up, install, and ship.
+        </p>
+      </div>
+      <div className="mt-16 grid gap-6 md:grid-cols-3">
+        {steps.map((s) => (
+          <div
+            key={s.n}
+            className="group relative flex flex-col rounded-2xl border border-border bg-card p-8 transition-all duration-500 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[var(--shadow-kernel)]"
+          >
+            <div className="font-mono text-sm text-primary/60">{s.n}</div>
+            <h3 className="mt-3 text-xl font-semibold">{s.title}</h3>
+            <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+            <a
+              href={s.cta.href}
+              target={s.cta.href.startsWith("http") ? "_blank" : undefined}
+              rel={s.cta.href.startsWith("http") ? "noreferrer" : undefined}
+              className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80"
+            >
+              {s.cta.label} →
+            </a>
+          </div>
+        ))}
       </div>
     </section>
   );

@@ -15,9 +15,10 @@ export function Header() {
           <a href="#economics" className="hover:text-foreground transition-colors">Economics</a>
           <a href="#demo" className="hover:text-foreground transition-colors">Demo</a>
           <a href="#architecture" className="hover:text-foreground transition-colors">Architecture</a>
+          <a href="#try" className="hover:text-foreground transition-colors">Try now</a>
         </nav>
-        <a href="https://github.com/danicuki/aicorn" target="_blank" rel="noreferrer">
-          <Button variant="kernel" size="sm">View on GitHub</Button>
+        <a href="#try">
+          <Button variant="kernel" size="sm">Try free</Button>
         </a>
       </div>
     </header>
