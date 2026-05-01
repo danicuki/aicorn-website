@@ -41,6 +41,7 @@ export const Route = createRootRoute({
       { name: "twitter:description", content: "Aicorn Website is a landing page showcasing the Aicorn project's branding and description." },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/7OJ1qjTNZ1MBX6OytCrC9EWnGDk2/social-images/social-1777641723444-aicorn-mascot2.webp" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/7OJ1qjTNZ1MBX6OytCrC9EWnGDk2/social-images/social-1777641723444-aicorn-mascot2.webp" },
+      { name: "talentapp:project_verification", content: "8801e99049a886646cf78b823e91446218220a9e614f732c48bd3bb4692ceed77fdc7d8f86d42d250322df0232ec3e14d5531abfba087fe8b4866171e4449258" },
     ],
     links: [
       {
