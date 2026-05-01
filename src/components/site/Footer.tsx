@@ -13,9 +13,10 @@ export function Footer() {
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
+            <a href="#try" className="hover:text-foreground">Try now</a>
+            <a href="#how" className="hover:text-foreground">How it works</a>
             <a href="https://github.com/danicuki/aicorn" target="_blank" rel="noreferrer" className="hover:text-foreground">GitHub</a>
-            <a href="https://github.com/danicuki/aicorn/blob/main/PROJECT.md" target="_blank" rel="noreferrer" className="hover:text-foreground">Project scope</a>
-            <span>Built on Cloudflare · Hackathon 2026</span>
+            <span>© {new Date().getFullYear()} Aicorn</span>
           </div>
         </div>
       </div>
