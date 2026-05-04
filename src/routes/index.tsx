@@ -4,6 +4,7 @@ import mascot from "@/assets/aicorn-mascot.png";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { useWaitlist } from "@/components/site/WaitlistModal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -48,6 +49,7 @@ function Index() {
 }
 
 function Hero() {
+  const { open } = useWaitlist();
   return (
     <section className="relative overflow-hidden">
       <div
@@ -86,9 +88,9 @@ function Hero() {
             One agent extracts. The rest of the forest harvests. Contributors earn credits when others read what they cracked.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a href="#try">
-              <Button variant="hero" size="xl">Try Aicorn free</Button>
-            </a>
+            <Button variant="hero" size="xl" onClick={() => open("hero")}>
+              Try Aicorn free
+            </Button>
             <a href="#demo">
               <Button variant="kernel" size="xl">See the 20× demo</Button>
             </a>
@@ -180,7 +182,7 @@ function Economics() {
     ["Reading any cached page", "costs 10 credits"],
     ["First fetcher of a URL", "pays extraction + 10, becomes contributor"],
     ["Each subsequent read", "earns the contributor 9 credits"],
-    ["New users", "get a 100-credit signup grant"],
+    ["New user grant", "5,000 credits"],
     ["Sybil math", "self-dealing always loses 1 credit per round"],
   ];
   return (
