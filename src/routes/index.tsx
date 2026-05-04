@@ -362,6 +362,7 @@ KV cache lookup: is this URL extracted?
 }
 
 function CTA() {
+  const { open } = useWaitlist();
   return (
     <section className="container mx-auto max-w-5xl px-6 py-24 md:py-32">
       <div
@@ -379,9 +380,9 @@ function CTA() {
           Create a free account, drop SKILL.md into your agent, and start saving tokens on your very next request.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href="#try">
-            <Button variant="hero" size="xl">Get 5,000 free credits</Button>
-          </a>
+          <Button variant="hero" size="xl" onClick={() => open("other")}>
+            Get 5,000 free credits
+          </Button>
           <a href="https://github.com/danicuki/aicorn" target="_blank" rel="noreferrer">
             <Button variant="kernel" size="xl">View on GitHub</Button>
           </a>
@@ -392,24 +393,25 @@ function CTA() {
 }
 
 function TryNow() {
+  const { open } = useWaitlist();
   const steps = [
     {
       n: "01",
       title: "Create your account",
       body: "Sign up in under a minute and instantly receive 5,000 free credits — enough to harvest thousands of cached pages.",
-      cta: { label: "Create free account", href: "https://github.com/danicuki/aicorn" },
+      cta: { label: "Create free account", href: "#waitlist" as const, action: "open" as const },
     },
     {
       n: "02",
       title: "Install SKILL.md on your agent",
       body: "Drop our SKILL.md into Claude, Cursor, your custom agent, or any tool-using LLM. It teaches your agent to read the web through Aicorn.",
-      cta: { label: "Get SKILL.md", href: "https://github.com/danicuki/aicorn/blob/main/SKILL.md" },
+      cta: { label: "Get SKILL.md", href: "https://github.com/danicuki/aicorn/blob/main/SKILL.md" as const },
     },
     {
       n: "03",
       title: "Start using and saving tokens",
       body: "Every cached page costs a fraction of a fresh extraction. Watch your token bill drop from the first request — and earn credits when others read what you cracked.",
-      cta: { label: "See the economics", href: "#economics" },
+      cta: { label: "See the economics", href: "#economics" as const },
     },
   ];
   return (
@@ -432,14 +434,24 @@ function TryNow() {
             <div className="font-mono text-sm text-primary/60">{s.n}</div>
             <h3 className="mt-3 text-xl font-semibold">{s.title}</h3>
             <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-            <a
-              href={s.cta.href}
-              target={s.cta.href.startsWith("http") ? "_blank" : undefined}
-              rel={s.cta.href.startsWith("http") ? "noreferrer" : undefined}
-              className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80"
+            {"action" in s.cta && s.cta.action === "open" ? (
+              <button
+                type="button"
+                onClick={() => open("other")}
+                className="mt-6 inline-flex items-center gap-1 self-start text-sm font-medium text-primary hover:text-primary/80"
+              >
+                {s.cta.label} →
+              </button>
+            ) : (
+              <a
+                href={s.cta.href}
+                target={s.cta.href.startsWith("http") ? "_blank" : undefined}
+                rel={s.cta.href.startsWith("http") ? "noreferrer" : undefined}
+                className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80"
             >
               {s.cta.label} →
             </a>
+            )}
           </div>
         ))}
       </div>
