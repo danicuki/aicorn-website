@@ -67,7 +67,7 @@ export function WaitlistProvider({ children }: { children: React.ReactNode }) {
         >
           {status === "success" ? (
             <div className="text-center">
-              <h2 className="font-serif text-2xl font-extrabold tracking-tight text-foreground">
+              <h2 className="text-2xl font-extrabold tracking-tight text-foreground">
                 You're on the list.
               </h2>
               <p className="mt-3 text-sm text-muted-foreground">
@@ -83,7 +83,7 @@ export function WaitlistProvider({ children }: { children: React.ReactNode }) {
             </div>
           ) : (
             <form onSubmit={onSubmit}>
-              <h2 className="font-serif text-2xl font-extrabold tracking-tight text-foreground">
+              <h2 className="text-2xl font-extrabold tracking-tight text-foreground">
                 Invite-only while we scale the cache.
               </h2>
               <p className="mt-3 text-sm text-muted-foreground">
