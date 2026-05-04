@@ -1,8 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import logoSpark from "@/assets/logo-on-dark.svg";
 import { Button } from "@/components/ui/button";
+import { useWaitlist } from "@/components/site/WaitlistModal";
 
 export function Header() {
+  const { open } = useWaitlist();
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/70 backdrop-blur-xl">
       <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
@@ -16,9 +18,9 @@ export function Header() {
           <a href="#architecture" className="hover:text-foreground transition-colors">Architecture</a>
           <a href="#try" className="hover:text-foreground transition-colors">Try now</a>
         </nav>
-        <a href="#try">
-          <Button variant="kernel" size="sm">Try free</Button>
-        </a>
+        <Button variant="kernel" size="sm" onClick={() => open("nav")}>
+          Try free
+        </Button>
       </div>
     </header>
   );
