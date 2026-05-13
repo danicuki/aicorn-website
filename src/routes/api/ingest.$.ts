@@ -1,10 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-const HOST_MAP: Record<string, string> = {
-  "static.": "https://us-assets.i.posthog.com",
-  "assets.": "https://us-assets.i.posthog.com",
-};
-const DEFAULT_HOST = "https://us.i.posthog.com";
+const ASSETS_HOST = "https://eu-assets.i.posthog.com";
+const DEFAULT_HOST = "https://eu.i.posthog.com";
 
 const HOP_BY_HOP = new Set([
   "host",
@@ -23,13 +20,12 @@ const HOP_BY_HOP = new Set([
 async function proxy(request: Request, splat: string) {
   const url = new URL(request.url);
   // Route static asset paths to the assets host
-  let target = DEFAULT_HOST;
-  for (const [prefix, host] of Object.entries(HOST_MAP)) {
-    if (splat.startsWith(prefix) || splat.startsWith("static/") || splat.startsWith("array/")) {
-      target = host;
-      break;
-    }
-  }
+  const isAsset =
+    splat.startsWith("static/") ||
+    splat.startsWith("array/") ||
+    splat.endsWith(".js") ||
+    splat.endsWith(".js.map");
+  const target = isAsset ? ASSETS_HOST : DEFAULT_HOST;
   const upstream = `${target}/${splat}${url.search}`;
 
   const headers = new Headers();
