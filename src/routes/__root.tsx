@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 
 import appCss from "../styles.css?url";
 import { WaitlistProvider } from "@/components/site/WaitlistModal";
+import { PostHogTracker } from "@/components/site/PostHogProvider";
 
 function NotFoundComponent() {
   return (
@@ -73,6 +74,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <WaitlistProvider>
+      <PostHogTracker />
       <Outlet />
     </WaitlistProvider>
   );
