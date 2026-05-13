@@ -3,7 +3,10 @@ import { useRouter } from "@tanstack/react-router";
 import posthog from "posthog-js";
 
 const POSTHOG_KEY = "phc_r6x6kGxn3NHvPLdgwiPSAfQHRLHtP79EYePRKKsLjWWr";
-const POSTHOG_HOST = "https://us.i.posthog.com";
+// Reverse-proxied through our own origin to bypass ad blockers and
+// privacy extensions that block us.i.posthog.com directly.
+const POSTHOG_HOST = "/api/ingest";
+const POSTHOG_UI_HOST = "https://us.posthog.com";
 
 let initialized = false;
 
@@ -15,6 +18,7 @@ export function PostHogTracker() {
     if (!initialized) {
       posthog.init(POSTHOG_KEY, {
         api_host: POSTHOG_HOST,
+        ui_host: POSTHOG_UI_HOST,
         capture_pageview: false,
         capture_pageleave: true,
         person_profiles: "identified_only",
