@@ -3,6 +3,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
+import posthog from "posthog-js";
 
 type WaitlistSource = "nav" | "hero" | "other";
 
@@ -26,15 +27,18 @@ export function WaitlistProvider({ children }: { children: React.ReactNode }) {
     setEmail("");
     setStatus("idle");
     setIsOpen(true);
+    posthog.capture("waitlist_cta_clicked", { source: src });
   }, []);
 
   useEffect(() => {
-    if (!isOpen) {
+    if (isOpen) {
+      posthog.capture("waitlist_modal_opened", { source });
+    } else {
       // reset shortly after close
       const t = setTimeout(() => setStatus("idle"), 200);
       return () => clearTimeout(t);
     }
-  }, [isOpen]);
+  }, [isOpen, source]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,6 +46,7 @@ export function WaitlistProvider({ children }: { children: React.ReactNode }) {
     setStatus("submitting");
     const trimmed = email.trim();
     const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed) && trimmed.length <= 255;
+    posthog.capture("waitlist_email_submitted", { source, valid });
     if (!valid) {
       setStatus("error");
       return;
@@ -51,9 +56,12 @@ export function WaitlistProvider({ children }: { children: React.ReactNode }) {
       .insert({ email: trimmed, source });
     if (error) {
       console.error("waitlist insert failed", error);
+      posthog.capture("waitlist_signup_failed", { source, reason: "insert_error" });
       setStatus("error");
       return;
     }
+    posthog.capture("waitlist_signup_succeeded", { source });
+    posthog.identify(trimmed, { email: trimmed, signup_source: source });
     setStatus("success");
   };
 
